@@ -277,4 +277,5 @@ Potential improvements include:
 - 📱 Further mobile UI optimization
 - 📊 Application activity timeline
 - 🔗 Automatic job-board integration
+
 ⭐ If you found this project useful, feel free to explore the code and try the live demo.
