@@ -73,7 +73,7 @@ function AddJob({
             if (selectedJob) {
                 // UPDATE existing application
                 response = await fetch(
-                    `http://localhost:3000/applications/${selectedJob._id}`,
+                    `${import.meta.env.VITE_API_URL}/applications/${selectedJob._id}`,
                     {
                         method: "PUT",
                         headers: {
@@ -86,7 +86,7 @@ function AddJob({
             } else {
                 // ADD new application
                 response = await fetch(
-                    "http://localhost:3000/applications",
+                    `${import.meta.env.VITE_API_URL}/applications`,
                     {
                         method: "POST",
                         headers: {

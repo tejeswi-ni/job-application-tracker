@@ -47,7 +47,7 @@ function App() {
             const token = localStorage.getItem("token");
 
             const response = await fetch(
-                `http://localhost:3000/applications/${jobId}`,
+                `${import.meta.env.VITE_API_URL}/applications/${jobId}`,
                 {
                     method: "DELETE",
                     headers: {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import JobCard from "../components/JobCard";
 import "./Applications.css";
 
+
 function Applications({
     jobs,
     setJobs,
@@ -26,7 +27,7 @@ function Applications({
                 const token = localStorage.getItem("token");
 
                 const response = await fetch(
-                    "http://localhost:3000/applications",
+                    `${import.meta.env.VITE_API_URL}/applications`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`

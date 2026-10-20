@@ -14,7 +14,7 @@ function JobDetails({ editJob }) {
                 const token = localStorage.getItem("token");
 
                 const response = await fetch(
-                    `http://localhost:3000/applications/${id}`,
+                    `${import.meta.env.VITE_API_URL}/applications/${id}`,
                     {
                         headers: {
                             Authorization: `Bearer ${token}`
