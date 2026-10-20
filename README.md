@@ -1,76 +1,100 @@
+
+```markdown
 # 💼 Job Application Tracker
 
-A responsive **React-based job application tracking dashboard** that helps users organize, monitor, and manage their job applications from a single interface.
+A full-stack **MERN Job Application Tracker** that helps users organize, monitor, and manage their job applications from a single dashboard.
 
-Users can add, edit, delete, search, filter, sort, and view detailed job applications while tracking their application progress through different stages.
+Users can securely register and log in, add, edit, delete, search, filter, sort, and view detailed job applications while tracking their progress through different application stages.
 
-🚀 **Live Demo:** [https://job-application-tracker-react-ptam-nine.vercel.app/](https://job-application-tracker-react-ptam-nine.vercel.app/)
+🚀 **Live Demo:**  
+https://job-application-tracker-react-ptam-nine.vercel.app/
 
 ---
 
 ## ✨ Features
 
+### 🔐 Authentication
+
+- User registration and login
+- Password hashing with bcrypt
+- JWT-based authentication
+- Protected application routes
+- User-specific application data
+- Authorization for application operations
+
 ### 📋 Application Management
 
-* Add new job applications
-* Edit existing applications
-* Delete applications
-* View detailed information about each application
-* Track application status and progress
+- Add new job applications
+- Edit existing applications
+- Delete applications
+- View detailed application information
+- Track application status and progress
+- Add job links and notes
 
 ### 🔎 Search, Filter & Sort
 
-* Search applications by:
-
-  * Company name
-  * Job role
-  * Location
-* Filter applications by application status
-* Sort applications by:
-
-  * Newest
-  * Oldest
-  * Company A-Z
-  * Company Z-A
+- Search applications by:
+  - Company name
+  - Job role
+  - Location
+- Filter applications by status
+- Sort applications by:
+  - Newest
+  - Oldest
+  - Company A-Z
+  - Company Z-A
 
 ### 📊 Dashboard
 
-* Total applications count
-* Applications by status
-* Interview tracking
-* Offer tracking
-* Rejected application count
-* Visual application progress tracking
+- Total applications count
+- Applications by status
+- Interview tracking
+- Offer tracking
+- Rejected application count
+- Visual application progress tracking
 
-### 🛡️ User Experience
+### 🎨 User Experience
 
-* Form validation for required fields
-* Empty states when no applications are available
-* Empty states when search or filter results have no matches
-* Handling for missing applications
-* Handling for missing job links
-* Responsive design for desktop and mobile devices
-* Dark and light mode
+- Responsive design for desktop and mobile
+- Dark and light mode
+- Form validation
+- Empty states
+- Error handling
+- Missing application handling
+- Missing job link handling
+- Interactive application cards
+- Detailed application view
 
-### 💾 Data Persistence
+### 💾 Persistent Data
 
-* Application data is stored using browser `localStorage`
-* Data remains available after page refreshes
-* No backend database is required
+Application data is stored in **MongoDB Atlas** through the backend API.
+
+This means application data is associated with the authenticated user and persists across:
+
+- Page refreshes
+- Browser sessions
+- Different pages
+- Backend restarts
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology       | Purpose                                 |
-| ---------------- | --------------------------------------- |
-| **React**        | Building the user interface             |
-| **Vite**         | Development server and production build |
-| **JavaScript**   | Application logic                       |
-| **React Router** | Client-side routing and dynamic pages   |
-| **CSS**          | Styling, responsive layouts, and themes |
-| **localStorage** | Client-side data persistence            |
-| **Vercel**       | Deployment                              |
+| Technology | Purpose |
+| --- | --- |
+| **React** | Building the user interface |
+| **Vite** | Frontend development and production build |
+| **JavaScript** | Application logic |
+| **React Router** | Client-side routing |
+| **CSS** | Styling and responsive layouts |
+| **Node.js** | Backend runtime |
+| **Express.js** | Backend API |
+| **MongoDB Atlas** | Database |
+| **Mongoose** | MongoDB object modeling |
+| **JWT** | Authentication |
+| **bcryptjs** | Password hashing |
+| **Vercel** | Frontend deployment |
+| **Render** | Backend deployment |
 
 ---
 
@@ -99,12 +123,23 @@ Users can add, edit, delete, search, filter, sort, and view detailed job applica
 ```text
 job-tracker/
 │
+├── backend/
+│   ├── middleware/
+│   │   └── authMiddleware.js
+│   ├── models/
+│   │   ├── JobApplication.js
+│   │   └── User.js
+│   ├── routes/
+│   │   ├── applications.js
+│   │   └── auth.js
+│   ├── .env
+│   ├── .gitignore
+│   ├── package.json
+│   └── server.js
+│
 ├── public/
-│   └── screenshots/
-│       ├── addjob.png
-│       ├── applications.png
-│       ├── dashboard.png
-│       └── jobdetails .png
+│   ├── screenshots/
+│   └── job-bg.png
 │
 ├── src/
 │   ├── components/
@@ -117,7 +152,9 @@ job-tracker/
 │   │   ├── Home.jsx
 │   │   ├── Applications.jsx
 │   │   ├── AddJob.jsx
-│   │   └── JobDetails.jsx
+│   │   ├── JobDetails.jsx
+│   │   ├── Login.jsx
+│   │   └── Register.jsx
 │   │
 │   ├── App.jsx
 │   └── main.jsx
@@ -137,66 +174,111 @@ job-tracker/
 git clone https://github.com/tejeswi-ni/job-application-tracker-react-.git
 ```
 
-### 2. Navigate to the project directory
+### 2. Navigate to the project
 
 ```bash
-cd job-tracker
+cd job-application-tracker-react-
 ```
 
-### 3. Install dependencies
+### 3. Install frontend dependencies
 
 ```bash
 npm install
 ```
 
+### 4. Install backend dependencies
+
+```bash
+cd backend
+npm install
+```
+
 ---
 
-## ▶️ Running the Project
+## 🔐 Environment Variables
 
-Start the development server:
+### Frontend
+
+Create a `.env` file in the project root:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+### Backend
+
+Create a `.env` file inside the `backend` directory:
+
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+**Never commit `.env` files or database credentials to GitHub.**
+
+---
+
+## ▶️ Running the Project Locally
+
+### Start the backend
+
+From the `backend` directory:
+
+```bash
+npm start
+```
+
+The backend runs on:
+
+```text
+http://localhost:3000
+```
+
+### Start the frontend
+
+From the project root:
 
 ```bash
 npm run dev
 ```
 
-Open the local development URL displayed in the terminal.
-
-Usually:
-
-```text
-http://localhost:5173
-```
+The frontend will run on the local URL displayed by Vite.
 
 ---
 
 ## 🧭 Application Routes
 
-| Route               | Description                            |
-| ------------------- | -------------------------------------- |
-| `/`                 | Dashboard                              |
-| `/applications`     | View all job applications              |
-| `/applications/:id` | View details of a specific application |
-| `/add-job`          | Add or edit a job application          |
+| Route | Description |
+| --- | --- |
+| `/` | Landing page |
+| `/login` | User login |
+| `/register` | User registration |
+| `/home` | Dashboard |
+| `/applications` | View all applications |
+| `/applications/:id` | View application details |
+| `/add-job` | Add or edit an application |
 
-The application uses **React Router** for client-side navigation and dynamic job detail pages.
+Protected routes require user authentication.
 
 ---
 
-## 💾 Data Persistence
-
-Job application data is stored locally in the browser using:
+## 🔄 Application Flow
 
 ```text
-localStorage
+User
+  ↓
+Register / Login
+  ↓
+JWT Authentication
+  ↓
+React Frontend
+  ↓
+Express REST API
+  ↓
+MongoDB Atlas
 ```
 
-This allows application data to remain available after:
-
-* Refreshing the page
-* Navigating between pages
-* Restarting the development server
-
-Since the project currently uses browser storage, the data is **device/browser-specific** and is not synchronized with a backend database.
+Each authenticated user can access and manage their own job applications.
 
 ---
 
@@ -204,64 +286,75 @@ Since the project currently uses browser storage, the data is **device/browser-s
 
 This project was built to practice and demonstrate:
 
-* React component development
-* React Hooks and state management
-* Form handling and validation
-* Conditional rendering
-* React Router
-* Dynamic routes
-* CRUD operations
-* Searching, filtering, and sorting
-* Browser `localStorage`
-* Responsive UI development
-* Dark and light themes
-* Empty-state handling
-* Error-state handling
-* Deployment with Vercel
-
----
-
-## 🔮 Future Improvements
-
-Potential improvements for future versions include:
-
-* 🔐 User authentication
-* ☁️ Backend database integration
-* 🔄 Cloud data synchronization
-* ⏰ Application deadline reminders
-* 📈 Advanced application analytics
-* 📤 Export applications to CSV
-* 📄 Pagination for large application lists
-* 🔔 Notifications and reminders
-* 📱 Further mobile UI optimization
+- React component development
+- React Hooks and state management
+- Form handling and validation
+- React Router
+- Dynamic routes
+- CRUD operations
+- REST API integration
+- Express.js backend development
+- MongoDB and Mongoose
+- JWT authentication
+- Password hashing
+- Protected routes
+- User-specific data
+- Searching, filtering, and sorting
+- Responsive UI development
+- Dark and light themes
+- Error and empty-state handling
+- Full-stack deployment
 
 ---
 
 ## 🚀 Deployment
 
-The application is deployed using **Vercel**.
+### Frontend
 
-### Live Application
+The React frontend is deployed using **Vercel**.
 
-👉 [https://job-application-tracker-react-ptam-nine.vercel.app/](https://job-application-tracker-react-ptam-nine.vercel.app/)
+**Live Application:**  
+https://job-application-tracker-react-ptam-nine.vercel.app/
 
-The project also includes a `vercel.json` configuration to support React Router routes when directly refreshing pages such as:
+### Backend
+
+The Express backend is deployed using **Render**.
+
+**Backend API:**  
+https://job-application-tracker-react.onrender.com/
+
+### Database
+
+Application data is stored using **MongoDB Atlas**.
+
+The deployed architecture is:
 
 ```text
-/applications
-/applications/1
+Vercel
+   ↓
+Render
+   ↓
+MongoDB Atlas
 ```
 
 ---
 
-## 👩‍💻 Author
+## 🔮 Future Improvements
 
-### Tejeswini
+Potential improvements include:
 
-CSE Student | React Developer | DSA Enthusiast
-
-This project was built to strengthen frontend development skills by creating a practical application with real-world features such as CRUD operations, filtering, sorting, routing, persistent browser storage, responsive design, and deployment.
+- 📈 Advanced application analytics
+- ⏰ Application deadline reminders
+- 📤 Export applications to CSV
+- 📄 Pagination for large application lists
+- 🔔 Notifications and reminders
+- 📱 Further mobile UI optimization
+- 📊 Application activity timeline
+- 🔗 Automatic job-board integration
 
 ---
 
 ⭐ **If you found this project useful, feel free to explore the code and try the live demo.**
+```
+
+
