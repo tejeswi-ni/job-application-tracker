@@ -1,5 +1,3 @@
-
-```markdown
 # 💼 Job Application Tracker
 
 A full-stack **MERN Job Application Tracker** that helps users organize, monitor, and manage their job applications from a single dashboard.
@@ -37,7 +35,7 @@ https://job-application-tracker-react-ptam-nine.vercel.app/
   - Company name
   - Job role
   - Location
-- Filter applications by status
+- Filter applications by application status
 - Sort applications by:
   - Newest
   - Oldest
@@ -69,7 +67,7 @@ https://job-application-tracker-react-ptam-nine.vercel.app/
 
 Application data is stored in **MongoDB Atlas** through the backend API.
 
-This means application data is associated with the authenticated user and persists across:
+Each authenticated user's applications are stored securely and remain available across:
 
 - Page refreshes
 - Browser sessions
@@ -162,109 +160,58 @@ job-tracker/
 ├── package.json
 ├── vercel.json
 └── README.md
-```
 
----
-
-## ⚙️ Installation
-
-### 1. Clone the repository
-
-```bash
+⚙️ Installation
+1. Clone the repository
 git clone https://github.com/tejeswi-ni/job-application-tracker-react-.git
-```
 
-### 2. Navigate to the project
-
-```bash
+2. Navigate to the project
 cd job-application-tracker-react-
-```
 
-### 3. Install frontend dependencies
-
-```bash
+3. Install frontend dependencies
 npm install
-```
 
-### 4. Install backend dependencies
-
-```bash
+4. Install backend dependencies
 cd backend
 npm install
-```
 
----
-
-## 🔐 Environment Variables
-
-### Frontend
-
-Create a `.env` file in the project root:
-
-```env
+🔐 Environment Variables
+Frontend
+Create a .env file in the project root:
 VITE_API_URL=http://localhost:3000
-```
 
-### Backend
-
-Create a `.env` file inside the `backend` directory:
-
-```env
+Backend
+Create a .env file inside the backend directory:
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-```
 
-**Never commit `.env` files or database credentials to GitHub.**
-
----
-
-## ▶️ Running the Project Locally
-
-### Start the backend
-
-From the `backend` directory:
-
-```bash
+Never commit .env files or database credentials to GitHub.
+▶️ Running the Project Locally
+Start the backend
+From the backend directory:
 npm start
-```
 
 The backend runs on:
-
-```text
 http://localhost:3000
-```
 
-### Start the frontend
-
+Start the frontend
 From the project root:
-
-```bash
 npm run dev
-```
 
 The frontend will run on the local URL displayed by Vite.
+🧭 Application Routes
+Route	Description
+/	Landing page
+/login	User login
+/register	User registration
+/home	Dashboard
+/applications	View all applications
+/applications/:id	View application details
+/add-job	Add or edit an application
 
----
-
-## 🧭 Application Routes
-
-| Route | Description |
-| --- | --- |
-| `/` | Landing page |
-| `/login` | User login |
-| `/register` | User registration |
-| `/home` | Dashboard |
-| `/applications` | View all applications |
-| `/applications/:id` | View application details |
-| `/add-job` | Add or edit an application |
 
 Protected routes require user authentication.
-
----
-
-## 🔄 Application Flow
-
-```text
+🔄 Application Flow
 User
   ↓
 Register / Login
@@ -276,16 +223,10 @@ React Frontend
 Express REST API
   ↓
 MongoDB Atlas
-```
 
 Each authenticated user can access and manage their own job applications.
-
----
-
-## 🎯 Project Goals
-
+🎯 Project Goals
 This project was built to practice and demonstrate:
-
 - React component development
 - React Hooks and state management
 - Form handling and validation
@@ -304,45 +245,29 @@ This project was built to practice and demonstrate:
 - Dark and light themes
 - Error and empty-state handling
 - Full-stack deployment
+🚀 Deployment
+Frontend
+The React frontend is deployed using Vercel.
 
----
-
-## 🚀 Deployment
-
-### Frontend
-
-The React frontend is deployed using **Vercel**.
-
-**Live Application:**  
+Live Application:
 https://job-application-tracker-react-ptam-nine.vercel.app/
+Backend
+The Express backend is deployed using Render.
 
-### Backend
-
-The Express backend is deployed using **Render**.
-
-**Backend API:**  
+Backend API:
 https://job-application-tracker-react.onrender.com/
-
-### Database
-
-Application data is stored using **MongoDB Atlas**.
+Database
+Application data is stored using MongoDB Atlas.
 
 The deployed architecture is:
-
-```text
 Vercel
    ↓
 Render
    ↓
 MongoDB Atlas
-```
 
----
-
-## 🔮 Future Improvements
-
+🔮 Future Improvements
 Potential improvements include:
-
 - 📈 Advanced application analytics
 - ⏰ Application deadline reminders
 - 📤 Export applications to CSV
@@ -351,10 +276,4 @@ Potential improvements include:
 - 📱 Further mobile UI optimization
 - 📊 Application activity timeline
 - 🔗 Automatic job-board integration
-
----
-
-⭐ **If you found this project useful, feel free to explore the code and try the live demo.**
-```
-
-
+⭐ If you found this project useful, feel free to explore the code and try the live demo.
