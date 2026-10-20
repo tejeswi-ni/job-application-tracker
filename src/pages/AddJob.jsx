@@ -21,10 +21,11 @@ function AddJob({
     const [formData, setFormData] = useState(initialFormData);
 
     const navigate = useNavigate();
-    const [errors,setErrors] = useState({});
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
-        const {name,value} = e.target;
+        const { name, value } = e.target;
+
         setFormData((prev) => ({
             ...prev,
             [name]: value,
@@ -32,62 +33,111 @@ function AddJob({
 
         setErrors((prev) => ({
             ...prev,
-            [name] : ""
+            [name]: "",
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const newErrors = {}
+        const newErrors = {};
 
-        if(!formData.company.trim()){
+        if (!formData.company.trim()) {
             newErrors.company = "*Company name is required";
         }
 
-        if(!formData.role.trim()){
+        if (!formData.role.trim()) {
             newErrors.role = "*Job role is required";
         }
 
-        if(!formData.location.trim()){
+        if (!formData.location.trim()) {
             newErrors.location = "*Job location is required";
         }
 
-        if(!formData.dateApplied){
+        if (!formData.dateApplied) {
             newErrors.dateApplied = "*Date applied is required";
         }
 
-        if(Object.keys(newErrors).length > 0){
+        if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
         }
 
         setErrors({});
 
-        if (selectedJob) {
-            const updatedJob = {
-                ...formData,
-                id: selectedJob.id,
-            };
+        try {
+            const token = localStorage.getItem("token");
 
-            setJobs((prevJobs) =>
-                prevJobs.map((job) =>
-                    job.id === selectedJob.id ? updatedJob : job
-                )
-            );
+            let response;
 
-            setSelectedJob(null);
-        } else {
-            const newJob = {
-                ...formData,
-                id: Date.now(),
-            };
+            if (selectedJob) {
+                // UPDATE existing application
+                response = await fetch(
+                    `http://localhost:3000/applications/${selectedJob._id}`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`
+                        },
+                        body: JSON.stringify(formData),
+                    }
+                );
+            } else {
+                // ADD new application
+                response = await fetch(
+                    "http://localhost:3000/applications",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`
+                        },
+                        body: JSON.stringify(formData),
+                    }
+                );
+            }
 
-            setJobs((prevJobs) => [...prevJobs, newJob]);
+            const data = await response.json();
+
+            // Unauthorized
+            if (response.status === 401) {
+                alert("Session expired. Please login again.");
+                localStorage.removeItem("token");
+                navigate("/login");
+                return;
+            }
+
+            // Forbidden
+            if (response.status === 403) {
+                alert("You are not allowed to modify this application.");
+                return;
+            }
+
+            if (!response.ok) {
+                alert(data.message || "Failed to save application");
+                return;
+            }
+
+            if (selectedJob) {
+                setJobs((prevJobs) =>
+                    prevJobs.map((job) =>
+                        job._id === selectedJob._id ? data : job
+                    )
+                );
+
+                setSelectedJob(null);
+            } else {
+                setJobs((prevJobs) => [...prevJobs, data]);
+            }
+
+            setFormData(initialFormData);
+            navigate("/applications");
+
+        } catch (error) {
+            console.log("Error:", error);
+            alert("Could not connect to backend");
         }
-
-        setFormData(initialFormData);
-        navigate("/applications");
     };
 
     const handleCancelEdit = () => {
@@ -128,8 +178,11 @@ function AddJob({
                         placeholder="Enter company's name..."
                         required
                     />
+
                     {errors.company && (
-                        <p className="error-message">{errors.company}</p>
+                        <p className="error-message">
+                            {errors.company}
+                        </p>
                     )}
                 </div>
 
@@ -147,8 +200,11 @@ function AddJob({
                         placeholder="Enter your job role"
                         required
                     />
+
                     {errors.role && (
-                        <p className="error-message">{errors.role}</p>
+                        <p className="error-message">
+                            {errors.role}
+                        </p>
                     )}
                 </div>
 
@@ -166,8 +222,11 @@ function AddJob({
                         placeholder="Enter job's location"
                         required
                     />
+
                     {errors.location && (
-                        <p className="error-message">{errors.location}</p>
+                        <p className="error-message">
+                            {errors.location}
+                        </p>
                     )}
                 </div>
 
@@ -202,8 +261,12 @@ function AddJob({
                         value={formData.dateApplied}
                         onChange={handleChange}
                     />
-                    {errors.dateApplied && 
-                    <p className="error-message">{errors.dateApplied} </p>}
+
+                    {errors.dateApplied && (
+                        <p className="error-message">
+                            {errors.dateApplied}
+                        </p>
+                    )}
                 </div>
 
                 <div className="form-group">

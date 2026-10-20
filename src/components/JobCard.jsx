@@ -14,7 +14,7 @@ function JobCard({ job, deleteJob, editJob }) {
 
     return (
         <div className={`job-card ${job.status.toLowerCase()}`}
-            onClick={() => navigate(`/applications/${job.id}`)}
+            onClick={() => navigate(`/applications/${job._id}`)}
         >
 
             <h3>{job.company}</h3>
@@ -44,7 +44,7 @@ function JobCard({ job, deleteJob, editJob }) {
                     className="delete-button"
                     onClick={(e) =>{
                         e.stopPropagation();
-                        deleteJob(job.id)
+                        deleteJob(job._id)
                     } }
                 >
                     <FiTrash2 />
@@ -56,7 +56,7 @@ function JobCard({ job, deleteJob, editJob }) {
                     className="edit-button"
                     onClick={(e) => {
                         e.stopPropagation();
-                        editJob(job.id)
+                        editJob(job._id)
                     } }
                 >
                     <FiEdit />

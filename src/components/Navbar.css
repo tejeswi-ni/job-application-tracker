@@ -134,3 +134,35 @@ body.dark .nav-links button:hover a {
         padding: 8px 12px;
     }
 }
+
+/* =========================
+   LOGOUT BUTTON
+   ========================= */
+
+.logout-button {
+    color: #dc2626;
+    font-weight: 500;
+    border: 1px solid #fecaca !important;
+    background: #fef2f2 !important;
+}
+
+.logout-button:hover {
+    background: #fee2e2 !important;
+    color: #b91c1c;
+    border-color: #fca5a5 !important;
+}
+
+/* =========================
+   DARK MODE LOGOUT
+   ========================= */
+
+body.dark .logout-button {
+    color: #f87171;
+    border-color: #7f1d1d !important;
+    background: #2a1515 !important;
+}
+
+body.dark .logout-button:hover {
+    background: #3f1d1d !important;
+    color: #fca5a5;
+}

@@ -1,13 +1,32 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./JobDetails.css";
 
-function JobDetails({ jobs, editJob }) {
+function JobDetails({ editJob }) {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const job = jobs.find(
-        (job) => job.id === Number(id)
-    );
+    const [job, setJob] = useState(null);
+
+    useEffect(() => {
+        const fetchJob = async () => {
+            try {
+                const response = await fetch(
+                    `http://localhost:3000/applications/${id}`
+                );
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    setJob(data);
+                }
+            } catch (error) {
+                console.log("Error fetching application:", error);
+            }
+        };
+
+        fetchJob();
+    }, [id]);
 
     return (
         <div className="job-details-container">
@@ -50,6 +69,7 @@ function JobDetails({ jobs, editJob }) {
 
                     <div className="job-detail">
                         <strong>Job Link</strong>
+
                         {job.jobLink ? (
                             <a
                                 className="job-link"
@@ -59,18 +79,17 @@ function JobDetails({ jobs, editJob }) {
                             >
                                 View Job ↗
                             </a>
-                        ): (
+                        ) : (
                             <span className="no-link">
                                 No job link provided.
                             </span>
                         )}
-                        
                     </div>
 
                     <div className="job-details-actions">
                         <button
                             className="details-edit-button"
-                            onClick={() => editJob(job.id)}
+                            onClick={() => editJob(job._id)}
                         >
                             Edit Application
                         </button>
@@ -80,11 +99,15 @@ function JobDetails({ jobs, editJob }) {
             ) : (
                 <div className="job-details-card">
                     <h2>🔍 Application Not Found</h2>
+
                     <p>
                         This application doesn't exist or may have been deleted.
                     </p>
-                    <button className="details-edit-button"
-                     onClick={() => navigate("/applications")}>
+
+                    <button
+                        className="details-edit-button"
+                        onClick={() => navigate("/applications")}
+                    >
                         Back to Applications
                     </button>
                 </div>
