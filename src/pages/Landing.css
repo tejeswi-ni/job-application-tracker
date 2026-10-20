@@ -1,41 +1,130 @@
 .landing-container {
-    min-height: 100vh;
+    min-height: calc(100vh - 114px);
+
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 20px;
+
+    padding: 60px 8%;
+
+    background-color: #0b1020;
+    background-image: url("/job-bg.png");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 70% auto;
 }
 
+/* Content */
+
 .landing-content {
-    max-width: 700px;
+    width: 50%;
+    max-width: 600px;
+    z-index: 1;
 }
 
 .landing-content h1 {
-    font-size: 48px;
+    font-size: 58px;
+    line-height: 1.1;
     margin-bottom: 20px;
+
+    color: #f8fafc;
 }
 
 .landing-content p {
     font-size: 20px;
-    margin-bottom: 35px;
     line-height: 1.6;
+    margin-bottom: 35px;
+
+    color: #cbd5e1;
 }
+
+/* Buttons */
 
 .landing-buttons {
     display: flex;
-    justify-content: center;
-    gap: 15px;
+    gap: 16px;
 }
 
 .landing-buttons button {
-    padding: 12px 28px;
-    font-size: 16px;
-    border: none;
+    padding: 13px 30px;
+
+    border: 1px solid #3b82f6;
     border-radius: 8px;
+
+    font-size: 16px;
+    font-weight: 600;
+
     cursor: pointer;
+
+    background: #111827;
+    color: #e5e7eb;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-.landing-buttons a {
-    text-decoration: none;
+/* Hover effect */
+
+.landing-buttons button:hover {
+    transform: translateY(-4px);
+
+    background: #1e293b;
+
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+}
+
+/* Sign Up button */
+
+.landing-buttons button:last-child {
+    background: #3b82f6;
+    color: #ffffff;
+    border-color: #3b82f6;
+}
+
+.landing-buttons button:last-child:hover {
+    background: #2563eb;
+
+    box-shadow: 0 8px 22px rgba(59, 130, 246, 0.35);
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .landing-container {
+        padding: 50px 6%;
+
+        background-size: cover;
+        background-position: center;
+    }
+
+    .landing-content {
+        width: 100%;
+        max-width: 550px;
+    }
+
+    .landing-content h1 {
+        font-size: 42px;
+    }
+
+    .landing-content p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .landing-content h1 {
+        font-size: 36px;
+    }
+
+    .landing-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 180px;
+    }
+
+    .landing-buttons button {
+        width: 100%;
+    }
 }

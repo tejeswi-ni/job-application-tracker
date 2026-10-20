@@ -11,14 +11,23 @@ function JobDetails({ editJob }) {
     useEffect(() => {
         const fetchJob = async () => {
             try {
+                const token = localStorage.getItem("token");
+
                 const response = await fetch(
-                    `http://localhost:3000/applications/${id}`
+                    `http://localhost:3000/applications/${id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    }
                 );
 
                 const data = await response.json();
 
                 if (response.ok) {
                     setJob(data);
+                }else {
+                    console.log("Failed to fetch job:", response.status, data);
                 }
             } catch (error) {
                 console.log("Error fetching application:", error);
@@ -57,7 +66,13 @@ function JobDetails({ editJob }) {
 
                     <div className="job-detail">
                         <strong>Date Applied</strong>
-                        <span>{job.dateApplied}</span>
+                        <span>
+                            {new Date(job.dateApplied).toLocaleDateString("en-IN", {
+                                day: "2-digit",
+                                month: "short",
+                                year: "numeric"
+                            })}
+                        </span>
                     </div>
 
                     <div className="job-notes">

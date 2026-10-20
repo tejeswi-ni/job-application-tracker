@@ -30,7 +30,12 @@ function JobCard({ job, deleteJob, editJob }) {
             </p>
 
             <p>
-                <strong>Date Applied:</strong> {job.dateApplied}
+                <strong>Date Applied:</strong>{" "}
+                {new Date(job.dateApplied).toLocaleDateString("en-IN", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                })}
             </p>
 
             <StatusBadge status={job.status} />
