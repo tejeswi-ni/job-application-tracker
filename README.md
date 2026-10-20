@@ -160,6 +160,7 @@ job-tracker/
 ├── package.json
 ├── vercel.json
 └── README.md
+```
 
 ⚙️ Installation
 1. Clone the repository
