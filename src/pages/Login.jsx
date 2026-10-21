@@ -95,6 +95,13 @@ function Login() {
 
                     </form>
 
+                    <p className="register-link">
+                        New to Job Tracker?{" "}
+                        <span onClick={() => navigate("/register")}>
+                            Create an account
+                        </span>
+                    </p>
+
                 </div>
             </div>
         </div>

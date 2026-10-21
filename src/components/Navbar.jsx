@@ -1,51 +1,70 @@
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Navbar({ darkMode, setDarkMode }) {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+        setMenuOpen(false);
+    };
 
-  return (
-    <nav className="navbar">
+    const closeMenu = () => {
+        setMenuOpen(false);
+    };
 
-      <h2 className="navbar-title">
-        Job Application Tracker
-      </h2>
+    return (
+        <nav className="navbar">
 
-      <div className="nav-links">
+            <h2 className="navbar-title">
+                Job Application Tracker
+            </h2>
 
-        <button>
-          <Link to="/home">Home</Link>
-        </button>
+            <button
+                className="menu-button"
+                onClick={() => setMenuOpen(!menuOpen)}
+            >
+                {menuOpen ? "✕" : "☰"}
+            </button>
 
-        <button>
-          <Link to="/applications">Applications</Link>
-        </button>
+            <div className={`nav-links ${menuOpen ? "menu-open" : ""}`}>
 
-        <button>
-          <Link to="/add-job">Add Job</Link>
-        </button>
+                <button onClick={closeMenu}>
+                    <Link to="/home">Home</Link>
+                </button>
 
-        <button onClick={() => setDarkMode(!darkMode)}>
-          {darkMode ? "☀️" : "🌙"}
-        </button>
+                <button onClick={closeMenu}>
+                    <Link to="/applications">Applications</Link>
+                </button>
 
-        <button
-            className="logout-button"
-            onClick={handleLogout}
-        >
-            Logout
-        </button>
+                <button onClick={closeMenu}>
+                    <Link to="/add-job">Add Job</Link>
+                </button>
 
-      </div>
+                <button
+                    onClick={() => {
+                        setDarkMode(!darkMode);
+                        closeMenu();
+                    }}
+                >
+                    {darkMode ? "☀️" : "🌙"}
+                </button>
 
-    </nav>
-  );
+                <button
+                    className="logout-button"
+                    onClick={handleLogout}
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </nav>
+    );
 }
 
 export default Navbar;

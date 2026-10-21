@@ -114,9 +114,12 @@ function Applications({
 
             {/* Loading */}
             {loading && (
-                <div className="empty-state">
-                    <h2>Loading applications...</h2>
-                    <p>Please wait.</p>
+                <div className="loading-screen">
+                    <div className="loader"></div>
+
+                    <h2>Loading your applications...</h2>
+
+                    <p>Connecting to the server. Please wait.</p>
                 </div>
             )}
 

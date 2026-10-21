@@ -89,10 +89,12 @@
 }
 
 
-/* Responsive */
+/* Tablet */
 
 @media (max-width: 768px) {
     .landing-container {
+        min-height: calc(100vh - 80px);
+
         padding: 50px 6%;
 
         background-size: cover;
@@ -113,18 +115,48 @@
     }
 }
 
+
+/* Mobile */
+
 @media (max-width: 480px) {
+    .landing-container {
+        min-height: calc(100vh - 70px);
+
+        padding: 40px 20px;
+
+        align-items: center;
+
+        background-size: cover;
+        background-position: center;
+    }
+
+    .landing-content {
+        width: 100%;
+        max-width: none;
+    }
+
     .landing-content h1 {
         font-size: 36px;
+        line-height: 1.15;
+        margin-bottom: 16px;
+    }
+
+    .landing-content p {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 28px;
     }
 
     .landing-buttons {
         flex-direction: column;
+        gap: 12px;
         width: 100%;
-        max-width: 180px;
+        max-width: 220px;
     }
 
     .landing-buttons button {
         width: 100%;
+        padding: 12px 20px;
+        font-size: 15px;
     }
 }

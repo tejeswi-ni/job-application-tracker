@@ -7,10 +7,13 @@ function JobDetails({ editJob }) {
     const navigate = useNavigate();
 
     const [job, setJob] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchJob = async () => {
             try {
+                setLoading(true);
+
                 const token = localStorage.getItem("token");
 
                 const response = await fetch(
@@ -26,11 +29,17 @@ function JobDetails({ editJob }) {
 
                 if (response.ok) {
                     setJob(data);
-                }else {
-                    console.log("Failed to fetch job:", response.status, data);
+                } else {
+                    console.log(
+                        "Failed to fetch job:",
+                        response.status,
+                        data
+                    );
                 }
             } catch (error) {
                 console.log("Error fetching application:", error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -44,7 +53,13 @@ function JobDetails({ editJob }) {
                 Job Details
             </h1>
 
-            {job ? (
+            {loading ? (
+                <div className="job-details-card loading-details">
+                    <div className="loader"></div>
+                    <h2>Loading application...</h2>
+                    <p>Please wait while we fetch the details.</p>
+                </div>
+            ) : job ? (
                 <div className="job-details-card">
 
                     <h2>{job.company}</h2>
@@ -67,11 +82,14 @@ function JobDetails({ editJob }) {
                     <div className="job-detail">
                         <strong>Date Applied</strong>
                         <span>
-                            {new Date(job.dateApplied).toLocaleDateString("en-IN", {
-                                day: "2-digit",
-                                month: "short",
-                                year: "numeric"
-                            })}
+                            {new Date(job.dateApplied).toLocaleDateString(
+                                "en-IN",
+                                {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric"
+                                }
+                            )}
                         </span>
                     </div>
 
