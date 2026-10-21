@@ -7,6 +7,9 @@ Users can securely register and log in, add, edit, delete, search, filter, sort,
 🚀 **Live Demo:**  
 https://job-application-tracker-react-ptam-nine.vercel.app/
 
+💻 **GitHub:**  
+https://github.com/tejeswi-ni/job-application-tracker
+
 ---
 
 ## ✨ Features
@@ -130,7 +133,6 @@ job-tracker/
 │   ├── routes/
 │   │   ├── applications.js
 │   │   └── auth.js
-│   ├── .env
 │   ├── .gitignore
 │   ├── package.json
 │   └── server.js
@@ -164,10 +166,10 @@ job-tracker/
 
 ⚙️ Installation
 1. Clone the repository
-git clone https://github.com/tejeswi-ni/job-application-tracker-react-.git
+git clone https://github.com/tejeswi-ni/job-application-tracker.git
 
 2. Navigate to the project
-cd job-application-tracker-react-
+cd job-application-tracker
 
 3. Install frontend dependencies
 npm install
@@ -274,7 +276,6 @@ Potential improvements include:
 - 📤 Export applications to CSV
 - 📄 Pagination for large application lists
 - 🔔 Notifications and reminders
-- 📱 Further mobile UI optimization
 - 📊 Application activity timeline
 - 🔗 Automatic job-board integration
 
